@@ -1,0 +1,32 @@
+name: RebelCAD CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up CMake
+      uses: lukka/get-cmake@latest
+    
+    - name: Create build directory
+      run: mkdir build
+    
+    - name: Configure CMake
+      working-directory: build
+      run: cmake ..
+    
+    - name: Build
+      working-directory: build
+      run: cmake --build . --config Release
+    
+    - name: Run tests
+      working-directory: build
+      run: ctest -C Release
