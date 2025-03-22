@@ -1,86 +1,279 @@
-# RebelCAD
+# RebelCAD - Advanced CAD System
 
-## Overview
+RebelCAD is an advanced CAD system that provides powerful tools for 3D modeling, simulation, and analysis. This repository contains the core components of RebelCAD, including the Finite Element Analysis (FEA) system.
 
-RebelCAD is a comprehensive CAD/3D modeling software component of the RebelSUITE ecosystem. It provides powerful tools for engineering design, 3D modeling, and technical drawing.
+```
+  _____      _          _  _____          _____  
+ |  __ \    | |        | |/ ____|   /\   |  __ \ 
+ | |__) |___| |__   ___| | |       /  \  | |  | |
+ |  _  // _ \ '_ \ / _ \ | |      / /\ \ | |  | |
+ | | \ \  __/ |_) |  __/ | |____ / ____ \| |__| |
+ |_|  \_\___|_.__/ \___|_|\_____/_/    \_\_____/ 
+                                                 
+ Advanced CAD System - FEA Simulation Engine
+```
 
 ## Features
 
-- **3D Modeling**: Create and manipulate complex 3D models
-- **Technical Drawing**: Generate precise technical drawings
-- **Assembly Design**: Design and manage multi-part assemblies
-- **Parametric Modeling**: Create models with parametric constraints
-- **Simulation**: Perform basic structural and thermal simulations
-- **Import/Export**: Support for standard CAD file formats
+- **3D Modeling**: Create and edit complex 3D models
+- **Simulation**: Analyze the behavior of models under various conditions
+- **Finite Element Analysis**: Perform structural analysis on 3D models
+- **Material Library**: Access a wide range of engineering materials
+- **Result Visualization**: View and analyze simulation results
 
-## Technology Stack
+## Finite Element Analysis (FEA) System
 
-- **Core**: C++ with modern C++17/20 features
-- **Graphics**: OpenGL/DirectX for rendering
-- **UI**: Custom UI framework with Qt integration
-- **Math**: Robust computational geometry library
-- **Physics**: Integrated physics simulation engine
+The FEA system is a core component of RebelCAD that provides structural analysis capabilities. It allows users to analyze the mechanical behavior of 3D models under various loading conditions.
 
-## Directory Structure
+### FEA Features
 
-```
-RebelCAD/
-├── src/                 # Source code
-├── include/             # Header files
-├── tests/               # Unit and integration tests
-├── docs/                # Documentation
-├── external/            # External dependencies
-├── CMakeLists.txt       # Build configuration
-├── .github/             # GitHub workflows and templates
-├── .gitignore           # Git ignore file
-└── README.md            # This file
-```
+- Linear static analysis
+- Support for various element types (tetrahedral, hexahedral)
+- Material library with common engineering materials
+- Boundary conditions (fixed, displacement)
+- Loads (point force, pressure, body force)
+- Result visualization (displacements, stresses, strains)
 
-## Integration with RebelSUITE
+For more details, see the [FEA System Documentation](docs/simulation/FEA_System.md).
 
-RebelCAD is designed to work seamlessly with other RebelSUITE components:
-
-- **RebelENGINE**: Export models for use in game development
-- **RebelCODE**: Script-driven model generation and automation
-- **RebelFLOW**: Workflow automation for CAD operations
-- **RebelDESK**: Integrated development environment for CAD scripting
-
-## Building from Source
+## Building RebelCAD
 
 ### Prerequisites
 
-- CMake 3.15+
-- C++17 compatible compiler (MSVC 2019+, GCC 9+, or Clang 10+)
-- OpenGL 4.5+ or DirectX 11+
-- Qt 6.2+ (optional, for advanced UI features)
+- CMake 3.15 or higher
+- C++17 compatible compiler (MSVC, GCC, Clang)
+- Visual Studio 2022 (Windows) or equivalent IDE
+- PowerShell 5.0+ (for build scripts on Windows)
 
-### Build Steps
+### Building on Windows
 
-```bash
-# Clone the repository
-git clone https://github.com/snowmannn129/RebelCAD.git
-cd RebelCAD
+#### Using the Build Tools Menu
 
-# Create build directory
+The easiest way to build RebelCAD is to use the build tools menu:
+
+```
+build_tools.bat
+```
+
+This will open a menu-driven interface that allows you to:
+- Build specific components
+- Run tests
+- Debug incrementally
+- Manage build logs
+- And more
+
+#### Using Build Scripts
+
+For more control, you can use the PowerShell build scripts directly:
+
+```powershell
+# Build a specific component
+.\scripts\build_component.ps1 -Component simulation -BuildType Debug
+
+# Build only modified files
+.\scripts\rebuild_modified.ps1 -Component simulation
+
+# Filter build logs
+.\scripts\filter_logs.ps1 -BuildCommand "cmake --build build --config Debug"
+```
+
+See [scripts/README.md](scripts/README.md) for more details on the available scripts.
+
+#### Manual Build
+
+You can also build manually:
+
+```
 mkdir build
 cd build
-
-# Configure and build
-cmake ..
+cmake .. -G "Visual Studio 17 2022" -A win32
 cmake --build . --config Release
-
-# Run tests
-ctest -C Release
 ```
+
+### Building on Linux/macOS
+
+1. Clone the repository
+2. Run the build script:
+   ```
+   ./build.sh
+   ```
+   
+   Or manually:
+   ```
+   mkdir build
+   cd build
+   cmake ..
+   cmake --build . --config Release
+   ```
+
+### Modular CMake Structure for AI-Assisted Development
+
+RebelCAD uses a modular CMake structure that allows building and testing individual components independently. This is particularly useful for AI-assisted development and debugging.
+
+#### Building Specific Modules
+
+You can build specific modules by setting the corresponding CMake options:
+
+```bash
+# Configure with specific modules enabled
+cmake -B build -DBUILD_SIMULATION=ON -DBUILD_MODELING=OFF -DBUILD_UI=OFF
+
+# Build only the simulation module
+cmake --build build --target simulation
+```
+
+#### Building Specific Submodules
+
+For more granular control, you can build specific submodules:
+
+```bash
+# Configure with specific submodules enabled
+cmake -B build -DBUILD_SIMULATION=ON -DBUILD_SIMULATION_FEA=ON -DBUILD_SIMULATION_THERMAL=OFF
+
+# Build only the FEA submodule
+cmake --build build --target SimulationFEA
+```
+
+#### Running Specific Tests
+
+You can run specific tests using CTest:
+
+```bash
+# Run all tests
+ctest --test-dir build
+
+# Run only simulation tests
+ctest --test-dir build -L SIMULATION
+
+# Run only FEA tests
+ctest --test-dir build -L SIMULATION_FEA
+
+# Run only unit tests
+ctest --test-dir build -L UNIT
+```
+
+#### AI-Assisted Development Workflow
+
+RebelCAD includes scripts to streamline the AI-assisted development workflow:
+
+```bash
+# Windows
+ai_debug.bat -module simulation -submodule fea -clean
+
+# Linux/macOS
+./ai_debug.sh --module simulation --submodule fea --clean
+```
+
+For more details, see the [AI-Assisted Development](docs/AI_Assisted_Development.md) guide.
+
+## Running the FEA Test
+
+After building the project, you can run the FEA test program to see the FEA system in action:
+
+### Windows
+```
+bin\Release\fea_test.exe
+```
+
+### Linux/macOS
+```
+./bin/fea_test
+```
+
+The test program creates a simple mesh, applies materials, boundary conditions, and loads, then solves the FEA problem and displays the results.
+
+## Project Structure
+
+```
+RebelCAD/
+├── include/              # Header files
+│   ├── core/             # Core functionality
+│   └── simulation/       # Simulation and FEA
+├── src/                  # Source files
+│   ├── core/             # Core implementation
+│   └── simulation/       # Simulation and FEA implementation
+│       ├── fea/          # FEA submodule
+│       ├── thermal/      # Thermal analysis submodule
+│       ├── dynamic/      # Dynamic analysis submodule
+│       └── nonlinear/    # Non-linear analysis submodule
+├── docs/                 # Documentation
+│   ├── BuildAndDebugStrategy.md  # Build and debug strategy documentation
+│   ├── CMake_Strategy.md         # CMake modular structure strategy
+│   └── AI_Assisted_Development.md # AI-assisted development guide
+├── scripts/              # Build and debug scripts
+│   ├── build_component.ps1       # Build specific components
+│   ├── filter_logs.ps1           # Filter and manage build logs
+│   ├── analyze_log_chunks.ps1    # Analyze large log files
+│   ├── test_component.ps1        # Run tests for specific components
+│   ├── debug_incremental.ps1     # Debug tests incrementally
+│   ├── run_tests_by_category.ps1 # Run tests by category
+│   ├── rotate_logs.ps1           # Rotate and archive logs
+│   ├── ai_debug_workflow.ps1     # AI-assisted debugging workflow
+│   └── README.md                 # Script documentation
+├── tests/                # Test files
+│   ├── simulation/       # Simulation tests
+│   │   ├── fea/          # FEA tests
+│   │   ├── thermal/      # Thermal analysis tests
+│   │   ├── dynamic/      # Dynamic analysis tests
+│   │   └── nonlinear/    # Non-linear analysis tests
+│   ├── integration/      # Integration tests
+│   └── benchmark/        # Benchmark tests
+├── build_tools.bat       # Build tools menu interface
+├── build.bat             # Windows build script
+├── build.sh              # Linux/macOS build script
+├── ai_debug.bat          # AI-assisted debugging batch file
+├── ai_debug.sh           # AI-assisted debugging shell script
+└── CMakeLists.txt        # Main CMake configuration
+```
+
+## Debugging and Testing
+
+RebelCAD includes a comprehensive strategy for debugging and testing, with a focus on handling large error logs and outputs.
+
+### Testing
+
+Tests are categorized as SMALL, MEDIUM, or LARGE, and can be run selectively:
+
+```powershell
+# Run all simulation tests
+.\scripts\test_component.ps1 -Component simulation
+
+# Run only small tests
+.\scripts\run_tests_by_category.ps1 -Category SMALL
+```
+
+### Debugging
+
+For debugging complex issues, RebelCAD provides tools for incremental debugging:
+
+```powershell
+# Debug tests incrementally, saving state
+.\scripts\debug_incremental.ps1 -Component simulation -SaveState
+```
+
+### Log Management
+
+Large build logs can be managed with specialized tools:
+
+```powershell
+# Analyze a large log file in chunks
+.\scripts\analyze_log_chunks.ps1 -LogFile "logs/build_log.txt"
+
+# Rotate and archive logs
+.\scripts\rotate_logs.ps1 -Compress
+```
+
+For more details, see the [Build and Debug Strategy](docs/BuildAndDebugStrategy.md) document.
 
 ## Contributing
 
-Contributions to RebelCAD are welcome! Please see our [Contributing Guide](.github/CONTRIBUTING.md) for more information.
+Contributions to RebelCAD are welcome! Please follow the standard GitHub workflow:
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Submit a pull request
 
 ## License
 
-RebelCAD is licensed under the [MIT License](LICENSE).
-
-## Contact
-
-For questions or support, please contact the RebelSUITE team at [support@rebelsuite.com](mailto:support@rebelsuite.com).
+RebelCAD is licensed under the MIT License. See the LICENSE file for details.

@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\build_simulation\_deps\googletest-subbuild\CMakeFiles\a046872795b49ec66da3ea65f58eb91c\googletest-populate-mkdir.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\build_simulation\_deps\googletest-subbuild\CMakeFiles\a046872795b49ec66da3ea65f58eb91c\googletest-populate-download.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\build_simulation\_deps\googletest-subbuild\CMakeFiles\a046872795b49ec66da3ea65f58eb91c\googletest-populate-update.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\build_simulation\_deps\googletest-subbuild\CMakeFiles\a046872795b49ec66da3ea65f58eb91c\googletest-populate-patch.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\build_simulation\_deps\googletest-subbuild\CMakeFiles\a046872795b49ec66da3ea65f58eb91c\googletest-populate-configure.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\build_simulation\_deps\googletest-subbuild\CMakeFiles\a046872795b49ec66da3ea65f58eb91c\googletest-populate-build.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\build_simulation\_deps\googletest-subbuild\CMakeFiles\a046872795b49ec66da3ea65f58eb91c\googletest-populate-install.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\build_simulation\_deps\googletest-subbuild\CMakeFiles\a046872795b49ec66da3ea65f58eb91c\googletest-populate-test.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\build_simulation\_deps\googletest-subbuild\CMakeFiles\39e7ea5b3f9a4e6c21bce75ff523a258\googletest-populate-complete.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\build_simulation\_deps\googletest-subbuild\CMakeFiles\71c354fcae99c8a734c18f5494d109a1\googletest-populate.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\build_simulation\_deps\googletest-subbuild\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\build_simulation\_deps\googletest-subbuild\CMakeFiles\googletest-populate" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{B85E4AD3-C30D-3A24-9792-F9E03E21480F}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

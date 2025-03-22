@@ -1,0 +1,10 @@
+^C:\USERS\SNOWM\DESKTOP\VSCODE\REBELSUITE\REBELCAD\BUILD_SIMULATION\_DEPS\GOOGLETEST-SUBBUILD\CMAKEFILES\71C354FCAE99C8A734C18F5494D109A1\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/snowm/Desktop/VSCode/RebelSUITE/RebelCAD/build_simulation/_deps/googletest-subbuild -BC:/Users/snowm/Desktop/VSCode/RebelSUITE/RebelCAD/build_simulation/_deps/googletest-subbuild --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/snowm/Desktop/VSCode/RebelSUITE/RebelCAD/build_simulation/_deps/googletest-subbuild/googletest-populate.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

@@ -1,0 +1,10 @@
+^C:\USERS\SNOWM\DESKTOP\VSCODE\REBELSUITE\REBELCAD\TESTS\CMAKELISTS.TXT
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/snowm/Desktop/VSCode/RebelSUITE/RebelCAD -BC:/Users/snowm/Desktop/VSCode/RebelSUITE/RebelCAD/build_new --check-stamp-file C:/Users/snowm/Desktop/VSCode/RebelSUITE/RebelCAD/build_new/tests/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

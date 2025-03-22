@@ -1,0 +1,155 @@
+MSBuild version 17.13.15+18b3035f6 for .NET Framework
+
+  FEASystem.cpp
+  NonLinearSolver.cpp
+  DynamicSolver.cpp
+C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\src\simulation\NonLinearSolver.cpp(69,46): error C2039: 'getDofsPerNode': is not a member of 'rebel::simulation::Mesh' [C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\build_simulation\src\simulation\simulation.vcxproj]
+      C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\include\simulation\Mesh.h(141,7):
+      see declaration of 'rebel::simulation::Mesh'
+  
+C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\src\simulation\NonLinearSolver.cpp(237,37): error C2039: 'getAffectedDofs': is not a member of 'rebel::simulation::BoundaryCondition' [C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\build_simulation\src\simulation\simulation.vcxproj]
+      C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\include\simulation\BoundaryCondition.h(50,7):
+      see declaration of 'rebel::simulation::BoundaryCondition'
+  
+C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\src\simulation\NonLinearSolver.cpp(240,42): error C2039: 'getPrescribedValues': is not a member of 'rebel::simulation::BoundaryCondition' [C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\build_simulation\src\simulation\simulation.vcxproj]
+      C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\include\simulation\BoundaryCondition.h(50,7):
+      see declaration of 'rebel::simulation::BoundaryCondition'
+  
+C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\src\simulation\NonLinearSolver.cpp(270,37): error C2039: 'getAffectedDofs': is not a member of 'rebel::simulation::BoundaryCondition' [C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\build_simulation\src\simulation\simulation.vcxproj]
+      C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\include\simulation\BoundaryCondition.h(50,7):
+      see declaration of 'rebel::simulation::BoundaryCondition'
+  
+C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\src\simulation\NonLinearSolver.cpp(297,39): error C2039: 'getAffectedDofs': is not a member of 'rebel::simulation::Load' [C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\build_simulation\src\simulation\simulation.vcxproj]
+      C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\include\simulation\Load.h(47,7):
+      see declaration of 'rebel::simulation::Load'
+  
+C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\src\simulation\NonLinearSolver.cpp(300,44): error C2039: 'getLoadValues': is not a member of 'rebel::simulation::Load' [C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\build_simulation\src\simulation\simulation.vcxproj]
+      C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\include\simulation\Load.h(47,7):
+      see declaration of 'rebel::simulation::Load'
+  
+C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\src\simulation\NonLinearSolver.cpp(324,46): error C2039: 'getElementDofs': is not a member of 'rebel::simulation::Mesh' [C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\build_simulation\src\simulation\simulation.vcxproj]
+      C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\include\simulation\Mesh.h(141,7):
+      see declaration of 'rebel::simulation::Mesh'
+  
+C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\src\simulation\NonLinearSolver.cpp(350,42): error C2039: 'getElementDofs': is not a member of 'rebel::simulation::Mesh' [C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\build_simulation\src\simulation\simulation.vcxproj]
+      C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\include\simulation\Mesh.h(141,7):
+      see declaration of 'rebel::simulation::Mesh'
+  
+C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\src\simulation\NonLinearSolver.cpp(353,48): error C2039: 'getElementMaterial': is not a member of 'rebel::simulation::Mesh' [C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\build_simulation\src\simulation\simulation.vcxproj]
+      C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\include\simulation\Mesh.h(141,7):
+      see declaration of 'rebel::simulation::Mesh'
+  
+C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\src\simulation\NonLinearSolver.cpp(359,53): error C2039: 'computeStresses': is not a member of 'rebel::simulation::Material' [C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\build_simulation\src\simulation\simulation.vcxproj]
+      C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\include\simulation\Material.h(31,7):
+      see declaration of 'rebel::simulation::Material'
+  
+C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\src\simulation\NonLinearSolver.cpp(387,42): error C2039: 'getElementDofs': is not a member of 'rebel::simulation::Mesh' [C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\build_simulation\src\simulation\simulation.vcxproj]
+      C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\include\simulation\Mesh.h(141,7):
+      see declaration of 'rebel::simulation::Mesh'
+  
+C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\src\simulation\NonLinearSolver.cpp(422,42): error C2039: 'getElementDofs': is not a member of 'rebel::simulation::Mesh' [C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\build_simulation\src\simulation\simulation.vcxproj]
+      C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\include\simulation\Mesh.h(141,7):
+      see declaration of 'rebel::simulation::Mesh'
+  
+C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\src\simulation\NonLinearSolver.cpp(454,46): error C2039: 'getElementDofs': is not a member of 'rebel::simulation::Mesh' [C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\build_simulation\src\simulation\simulation.vcxproj]
+      C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\include\simulation\Mesh.h(141,7):
+      see declaration of 'rebel::simulation::Mesh'
+  
+C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\src\simulation\NonLinearSolver.cpp(484,42): error C2039: 'getElementDofs': is not a member of 'rebel::simulation::Mesh' [C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\build_simulation\src\simulation\simulation.vcxproj]
+      C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\include\simulation\Mesh.h(141,7):
+      see declaration of 'rebel::simulation::Mesh'
+  
+C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\src\simulation\NonLinearSolver.cpp(487,48): error C2039: 'getElementMaterial': is not a member of 'rebel::simulation::Mesh' [C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\build_simulation\src\simulation\simulation.vcxproj]
+      C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\include\simulation\Mesh.h(141,7):
+      see declaration of 'rebel::simulation::Mesh'
+  
+C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\src\simulation\NonLinearSolver.cpp(500,52): error C2039: 'getStiffnessMatrix': is not a member of 'rebel::simulation::Material' [C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\build_simulation\src\simulation\simulation.vcxproj]
+      C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\include\simulation\Material.h(31,7):
+      see declaration of 'rebel::simulation::Material'
+  
+C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\src\simulation\NonLinearSolver.cpp(529,57): error C2039: 'computeStresses': is not a member of 'rebel::simulation::Material' [C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\build_simulation\src\simulation\simulation.vcxproj]
+      C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\include\simulation\Material.h(31,7):
+      see declaration of 'rebel::simulation::Material'
+  
+C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\src\simulation\NonLinearSolver.cpp(552,42): error C2039: 'getElementDofs': is not a member of 'rebel::simulation::Mesh' [C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\build_simulation\src\simulation\simulation.vcxproj]
+      C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\include\simulation\Mesh.h(141,7):
+      see declaration of 'rebel::simulation::Mesh'
+  
+C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\src\simulation\NonLinearSolver.cpp(676,46): error C2039: 'getDofsPerNode': is not a member of 'rebel::simulation::Mesh' [C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\build_simulation\src\simulation\simulation.vcxproj]
+      C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\include\simulation\Mesh.h(141,7):
+      see declaration of 'rebel::simulation::Mesh'
+  
+C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\src\simulation\NonLinearSolver.cpp(704,1): error C2589: 'end of file': illegal token on right side of '::' [C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\build_simulation\src\simulation\simulation.vcxproj]
+C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\src\simulation\NonLinearSolver.cpp(703,19): error C2062: type 'unknown-type' unexpected [C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\build_simulation\src\simulation\simulation.vcxproj]
+C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\src\simulation\NonLinearSolver.cpp(669,50): error C1075: '{': no matching token found [C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\build_simulation\src\simulation\simulation.vcxproj]
+C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\src\simulation\DynamicSolver.cpp(110,73): error C2065: 'M_PI': undeclared identifier [C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\build_simulation\src\simulation\simulation.vcxproj]
+C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\src\simulation\FEASystem.cpp(420,48): warning C4458: declaration of 'settings' hides class member [C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\build_simulation\src\simulation\simulation.vcxproj]
+      C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\include\simulation\FEASystem.h(257,17):
+      see declaration of 'rebel::simulation::FEASystem::settings'
+  
+C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\src\simulation\DynamicSolver.cpp(511,24): error C2512: 'rebel::simulation::StressResult': no appropriate default constructor available [C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\build_simulation\src\simulation\simulation.vcxproj]
+      C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\src\simulation\DynamicSolver.cpp(511,24):
+      'rebel::simulation::StressResult::StressResult': no appropriate default constructor available
+          C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\src\simulation\DynamicSolver.cpp(511,24):
+          while trying to match the argument list '()'
+  
+C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\src\simulation\DynamicSolver.cpp(522,24): error C2512: 'rebel::simulation::StrainResult': no appropriate default constructor available [C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\build_simulation\src\simulation\simulation.vcxproj]
+      C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\src\simulation\DynamicSolver.cpp(522,24):
+      'rebel::simulation::StrainResult::StrainResult': no appropriate default constructor available
+          C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\src\simulation\DynamicSolver.cpp(522,24):
+          while trying to match the argument list '()'
+  
+C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\src\simulation\DynamicSolver.cpp(534,31): error C2512: 'rebel::simulation::ReactionForceResult': no appropriate default constructor available [C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\build_simulation\src\simulation\simulation.vcxproj]
+      C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\src\simulation\DynamicSolver.cpp(534,31):
+      'rebel::simulation::ReactionForceResult::ReactionForceResult': no appropriate default constructor available
+          C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\src\simulation\DynamicSolver.cpp(534,31):
+          while trying to match the argument list '()'
+  
+C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\external\eigen\Eigen\src\Core\util\Memory.h(444,20): warning C4127: conditional expression is constant [C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\build_simulation\src\simulation\simulation.vcxproj]
+  (compiling source file '../../../src/simulation/FEASystem.cpp')
+      C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\external\eigen\Eigen\src\Core\util\Memory.h(444,20):
+      consider using 'if constexpr' statement instead
+      C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\external\eigen\Eigen\src\Core\util\Memory.h(444,20):
+      the template instantiation context (the oldest one first) is
+          C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\include\simulation\LinearStaticSolver.h(255,21):
+          see reference to class template instantiation 'Eigen::Matrix<double,-1,1,0,-1,1>' being compiled
+          C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\external\eigen\Eigen\src\Core\Matrix.h(179,12):
+          see reference to class template instantiation 'Eigen::PlainObjectBase<Eigen::Matrix<double,-1,1,0,-1,1>>' being compiled
+          C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\external\eigen\Eigen\src\Core\PlainObjectBase.h(131,113):
+          see reference to class template instantiation 'Eigen::DenseStorage<double,-1,-1,1,0>' being compiled
+          C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\external\eigen\Eigen\src\Core\DenseStorage.h(621,24):
+          while compiling class template member function 'Eigen::DenseStorage<double,-1,-1,1,0>::~DenseStorage(void)'
+              C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\external\eigen\Eigen\src\Core\PlainObjectBase.h(995,1):
+              see the first reference to 'Eigen::DenseStorage<double,-1,-1,1,0>::~DenseStorage' in 'Eigen::PlainObjectBase<Eigen::Matrix<double,-1,1,0,-1,1>>::~PlainObjectBase'
+          C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\external\eigen\Eigen\src\Core\DenseStorage.h(621,51):
+          see reference to function template instantiation 'void Eigen::internal::conditional_aligned_delete_auto<T,true>(T *,size_t)' being compiled
+          with
+          [
+              T=double
+          ]
+  
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.43.34808\include\vector(2078,68): error C2036: 'rebel::simulation::AccelerationResult *': unknown size [C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\build_simulation\src\simulation\simulation.vcxproj]
+  (compiling source file '../../../src/simulation/FEASystem.cpp')
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.43.34808\include\vector(2078,68):
+      the template instantiation context (the oldest one first) is
+          C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\include\simulation\DynamicSolver.h(254,50):
+          see reference to class template instantiation 'std::vector<std::vector<rebel::simulation::AccelerationResult,std::allocator<rebel::simulation::AccelerationResult>>,std::allocator<std::vector<rebel::simulation::AccelerationResult,std::allocator<rebel::simulation::AccelerationResult>>>>' being compiled
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.43.34808\include\vector(2066,23):
+          while compiling class template member function 'void std::vector<std::vector<rebel::simulation::AccelerationResult,std::allocator<rebel::simulation::AccelerationResult>>,std::allocator<std::vector<rebel::simulation::AccelerationResult,std::allocator<rebel::simulation::AccelerationResult>>>>::_Tidy(void) noexcept'
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.43.34808\include\vector(815,14):
+              see the first reference to 'std::vector<std::vector<rebel::simulation::AccelerationResult,std::allocator<rebel::simulation::AccelerationResult>>,std::allocator<std::vector<rebel::simulation::AccelerationResult,std::allocator<rebel::simulation::AccelerationResult>>>>::_Tidy' in 'std::vector<std::vector<rebel::simulation::AccelerationResult,std::allocator<rebel::simulation::AccelerationResult>>,std::allocator<std::vector<rebel::simulation::AccelerationResult,std::allocator<rebel::simulation::AccelerationResult>>>>::~vector'
+              C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\include\simulation\DynamicSolver.h(267,24):
+              see the first reference to 'std::vector<std::vector<rebel::simulation::AccelerationResult,std::allocator<rebel::simulation::AccelerationResult>>,std::allocator<std::vector<rebel::simulation::AccelerationResult,std::allocator<rebel::simulation::AccelerationResult>>>>::~vector' in 'rebel::simulation::TimeHistoryResult::TimeHistoryResult'
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.43.34808\include\vector(2078,68):
+          see reference to class template instantiation 'std::vector<rebel::simulation::AccelerationResult,std::allocator<rebel::simulation::AccelerationResult>>' being compiled
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.43.34808\include\vector(2066,23):
+          while compiling class template member function 'void std::vector<rebel::simulation::AccelerationResult,std::allocator<rebel::simulation::AccelerationResult>>::_Tidy(void) noexcept'
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.43.34808\include\vector(815,14):
+              see the first reference to 'std::vector<rebel::simulation::AccelerationResult,std::allocator<rebel::simulation::AccelerationResult>>::_Tidy' in 'std::vector<rebel::simulation::AccelerationResult,std::allocator<rebel::simulation::AccelerationResult>>::~vector'
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.43.34808\include\vector(2230,1):
+              see the first reference to 'std::vector<rebel::simulation::AccelerationResult,std::allocator<rebel::simulation::AccelerationResult>>::~vector' in 'std::vector<rebel::simulation::AccelerationResult,std::allocator<rebel::simulation::AccelerationResult>>::~vector'
+  
+  gmock.vcxproj -> C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\build_simulation\lib\Debug\gmockd.lib
+  gmock_main.vcxproj -> C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\build_simulation\lib\Debug\gmock_maind.lib
+  gtest.vcxproj -> C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\build_simulation\lib\Debug\gtestd.lib
+  gtest_main.vcxproj -> C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\build_simulation\lib\Debug\gtest_maind.lib

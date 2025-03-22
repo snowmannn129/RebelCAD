@@ -1,5 +1,27 @@
 enable_testing()
 
+# Add test categories
+set(TEST_CATEGORIES
+    SMALL
+    MEDIUM
+    LARGE
+    UNIT
+    INTEGRATION
+    BENCHMARK
+    SIMULATION
+    SIMULATION_FEA
+    SIMULATION_THERMAL
+    SIMULATION_DYNAMIC
+    SIMULATION_NONLINEAR
+    CORE
+    MODELING
+    UI
+    SKETCHING
+    ASSEMBLY
+    CONSTRAINTS
+    GRAPHICS
+)
+
 # Add required headers
 include_directories(${CMAKE_SOURCE_DIR}/external/glad/include)
 
@@ -11,13 +33,18 @@ FetchContent_Declare(
     GIT_TAG release-1.11.0
 )
 
-FetchContent_Declare(
-    benchmark
-    GIT_REPOSITORY https://github.com/google/benchmark.git
-    GIT_TAG v1.8.3
-)
+# Add Google Benchmark if benchmark tests are enabled
+if(BUILD_BENCHMARK_TESTS)
+    FetchContent_Declare(
+        benchmark
+        GIT_REPOSITORY https://github.com/google/benchmark.git
+        GIT_TAG v1.7.1
+    )
+    set(BENCHMARK_ENABLE_TESTING OFF CACHE BOOL "Disable benchmark testing" FORCE)
+    FetchContent_MakeAvailable(benchmark)
+endif()
 
-FetchContent_MakeAvailable(googletest benchmark)
+FetchContent_MakeAvailable(googletest)
 include_directories(${GTEST_INCLUDE_DIRS})
 
 # Add required definitions
@@ -29,173 +56,107 @@ if(MSVC)
     )
 endif()
 
-# Core tests executable
-add_executable(core_tests
-    core/LogTests.cpp
-    core/ErrorTests.cpp
-    core/MemoryPoolTests.cpp
-    core/BlockAllocatorTests.cpp
-    core/SmartResourceManagerTests.cpp
-    core/MemoryLeakDetectorTests.cpp
-    core/ComponentTests.cpp
-    core/SmartPtrTests.cpp
-    core/EventSystemTests.cpp
-    core/FileIOTests.cpp
-    core/ThreadingTests.cpp
-    graphics/GraphicsSystemTests.cpp
-    graphics/ShaderTests.cpp
-    graphics/SceneNodeTest.cpp
-    graphics/GraphicsErrorTest.cpp
-    ui/MainWindowTests.cpp
-    ui/WindowManagerTests.cpp
-    ui/ContextMenuManagerTests.cpp
-    ui/ToolbarManagerTests.cpp
-    ui/WorkspaceManagerTests.cpp
-    ui/DockingManagerTest.cpp
-    ui/InputManagerTest.cpp
-    ui/StyleManagerTest.cpp
-    ui/widgets/ButtonTest.cpp
-    ui/widgets/TextInputTest.cpp
-    ui/widgets/CheckboxTest.cpp
-    ui/widgets/RadioButtonTest.cpp
-    ui/widgets/DropdownTest.cpp
-    ui/widgets/ListViewTest.cpp
-    ui/layouts/GridLayoutTest.cpp
-    ui/layouts/FlowLayoutTest.cpp
-    ui/layouts/StackLayoutTest.cpp
-    ui/layouts/DockLayoutTest.cpp
-    ui/layouts/FlexLayoutTest.cpp
-    sketching/LineTests.cpp
-    sketching/ArcTests.cpp
-    sketching/CircleTests.cpp
-    constraints/ParallelConstraintTests.cpp
-    constraints/PerpendicularConstraintTests.cpp
-    constraints/TangentConstraintTests.cpp
-    constraints/ConstraintManagerUITests.cpp
-    modeling/NurbsSurfaceTests.cpp
-    modeling/HalfEdgeMeshTests.cpp
-    modeling/PatchSurfaceTests.cpp
-    modeling/SubdivisionSurfaceTests.cpp
-    modeling/SubdivisionBooleanOperationsTests.cpp
-    modeling/BooleanToolTests.cpp
-    modeling/PatternToolTests.cpp
-    modeling/HalfEdgeTests.cpp
-    modeling/patterns/PatternSpacingTests.cpp
-    modeling/patterns/CurvePatternTests.cpp
-    assembly/ComponentPositionerTests.cpp
-    assembly/FixedJointTests.cpp
-    assembly/RevoluteJointTests.cpp
-    assembly/PrismaticJointTests.cpp
-    ui/PatternToolDialogTests.cpp
-)
-
-# Find OpenGL
+# Find required packages
 find_package(OpenGL REQUIRED)
 
-target_link_libraries(core_tests
-    PRIVATE
-    RebelCADCore
-    gtest
-    gtest_main
-    ${OPENGL_LIBRARIES}
-    glfw
-    glad
-    imgui
-    nlohmann_json::nlohmann_json
-    glm
-    dbghelp
-    libzstd_static
-)
-
-if(Vulkan_FOUND)
-    target_link_libraries(core_tests PRIVATE Vulkan::Vulkan ${SHADERC_LIB})
+# Try to find nlohmann_json
+find_package(nlohmann_json QUIET)
+if(NOT nlohmann_json_FOUND)
+    # If not found, we'll assume it's included in the main project
+    message(STATUS "nlohmann_json package not found, assuming it's included in the main project")
 endif()
 
-# Enable memory tracking in tests
-target_compile_definitions(core_tests PRIVATE
-    $<$<CONFIG:Debug>:REBEL_MEMORY_TRACKING_ENABLED>
-)
+# Only build tests if the corresponding module is enabled
+if(BUILD_UNIT_TESTS)
+    # Add subdirectories for unit tests
+    if(BUILD_SIMULATION)
+        add_subdirectory(simulation)
+    endif()
+    
+    if(BUILD_MODELING AND EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/modeling/CMakeLists.txt")
+        add_subdirectory(modeling)
+    endif()
+    
+    if(BUILD_UI AND EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/ui/CMakeLists.txt")
+        add_subdirectory(ui)
+    endif()
+    
+    if(BUILD_SKETCHING AND EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/sketching/CMakeLists.txt")
+        add_subdirectory(sketching)
+    endif()
+    
+    if(BUILD_ASSEMBLY AND EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/assembly/CMakeLists.txt")
+        add_subdirectory(assembly)
+    endif()
+    
+    if(BUILD_CONSTRAINTS AND EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/constraints/CMakeLists.txt")
+        add_subdirectory(constraints)
+    endif()
+    
+    if(BUILD_GRAPHICS AND EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/graphics/CMakeLists.txt")
+        add_subdirectory(graphics)
+    endif()
+endif()
 
-# Include directories
-target_include_directories(core_tests
-    PRIVATE
-    ${CMAKE_SOURCE_DIR}/include
-    ${GTEST_INCLUDE_DIRS}
-    ${CMAKE_SOURCE_DIR}/external/glad/include
-)
+if(BUILD_INTEGRATION_TESTS)
+    # Add subdirectory for integration tests
+    if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/integration/CMakeLists.txt")
+        add_subdirectory(integration)
+    endif()
+endif()
 
-if(Vulkan_FOUND)
-    target_include_directories(core_tests PRIVATE
-        ${VULKAN_SDK_PATH}/Include
-        ${SHADERC_INCLUDE_DIR}
+if(BUILD_BENCHMARK_TESTS)
+    # Add subdirectory for benchmark tests
+    if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/CMakeLists.txt")
+        add_subdirectory(benchmark)
+    endif()
+endif()
+
+# Simulation tests executable (for backward compatibility)
+if(BUILD_SIMULATION AND BUILD_UNIT_TESTS)
+    add_executable(simulation_tests
+        simulation/MaterialTests.cpp
+        simulation/BoundaryConditionTests.cpp
+        simulation/LoadTests.cpp
+        simulation/FEASystemTests.cpp
     )
+    
+    target_link_libraries(simulation_tests
+        PRIVATE
+        simulation
+        core
+        gtest
+        gtest_main
+        ${OPENGL_LIBRARIES}
+        glfw
+        glad
+        imgui
+        glm
+        dbghelp
+        libzstd_static
+    )
+    
+    # Add nlohmann_json if found
+    if(nlohmann_json_FOUND)
+        target_link_libraries(simulation_tests PRIVATE nlohmann_json::nlohmann_json)
+    endif()
+    
+    # Include directories
+    target_include_directories(simulation_tests
+        PRIVATE
+        ${CMAKE_SOURCE_DIR}/include
+        ${GTEST_INCLUDE_DIRS}
+        ${CMAKE_SOURCE_DIR}/external/glad/include
+    )
+    
+    # Set working directory for simulation tests
+    set_target_properties(simulation_tests PROPERTIES
+        VS_DEBUGGER_WORKING_DIRECTORY "${CMAKE_BINARY_DIR}"
+    )
+    
+    # Add simulation tests to CTest
+    add_test(NAME SimulationTests COMMAND simulation_tests)
+    
+    # Define test category for each test
+    set_property(TEST SimulationTests PROPERTY LABELS "MEDIUM;SIMULATION;UNIT")
 endif()
-
-
-# Set working directory for tests
-set_target_properties(core_tests PROPERTIES
-    VS_DEBUGGER_WORKING_DIRECTORY "${CMAKE_BINARY_DIR}"
-)
-
-# Add tests to CTest
-add_test(NAME CoreTests COMMAND core_tests)
-
-# Memory benchmarks executable
-add_executable(memory_benchmarks
-    core/MemoryBenchmarks.cpp
-)
-
-target_link_libraries(memory_benchmarks
-    PRIVATE
-    RebelCADCore
-    benchmark::benchmark
-    benchmark::benchmark_main
-)
-
-target_include_directories(memory_benchmarks
-    PRIVATE
-    ${CMAKE_SOURCE_DIR}/include
-)
-
-# Set working directory for benchmarks
-set_target_properties(memory_benchmarks PROPERTIES
-    VS_DEBUGGER_WORKING_DIRECTORY "${CMAKE_BINARY_DIR}"
-)
-
-# UI benchmarks executable
-add_executable(ui_benchmarks
-    ui/widgets/ListViewBenchmarks.cpp
-)
-
-target_link_libraries(ui_benchmarks
-    PRIVATE
-    RebelCADCore
-    benchmark::benchmark
-    benchmark::benchmark_main
-    imgui
-    glfw
-    glad
-    nlohmann_json::nlohmann_json
-)
-
-target_include_directories(ui_benchmarks
-    PRIVATE
-    ${CMAKE_SOURCE_DIR}/include
-    ${CMAKE_SOURCE_DIR}/external/glad/include
-)
-
-# Set working directory for UI benchmarks
-set_target_properties(ui_benchmarks PROPERTIES
-    VS_DEBUGGER_WORKING_DIRECTORY "${CMAKE_BINARY_DIR}"
-)
-
-# Add UI benchmarks to CTest with configuration
-add_test(
-    NAME UIBenchmarks 
-    COMMAND ui_benchmarks
-    CONFIGURATIONS Debug Release
-)
-set_tests_properties(UIBenchmarks PROPERTIES
-    ENVIRONMENT "GTEST_COLOR=1"
-    WORKING_DIRECTORY "${CMAKE_BINARY_DIR}/tests"
-)

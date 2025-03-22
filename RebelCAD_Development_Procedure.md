@@ -190,7 +190,70 @@ RebelCAD has the following core modules:
 - Customizable workspaces
 - Theme support
 
-## 7. Automation for Testing
+## 7. Modular CMake Structure for AI-Assisted Development
+
+RebelCAD uses a modular CMake structure that allows building and testing individual components independently. This is particularly useful for AI-assisted development and debugging.
+
+### Building Specific Modules and Submodules
+
+You can build specific modules and submodules by setting the corresponding CMake options:
+
+```powershell
+# Configure with specific modules enabled
+cmake -B build -DBUILD_SIMULATION=ON -DBUILD_MODELING=OFF -DBUILD_UI=OFF
+
+# Configure with specific submodules enabled
+cmake -B build -DBUILD_SIMULATION=ON -DBUILD_SIMULATION_FEA=ON -DBUILD_SIMULATION_THERMAL=OFF
+
+# Build only the simulation module
+cmake --build build --target simulation
+
+# Build only the FEA submodule
+cmake --build build --target SimulationFEA
+```
+
+### Running Specific Tests
+
+You can run specific tests using CTest:
+
+```powershell
+# Run all tests
+ctest --test-dir build
+
+# Run only simulation tests
+ctest --test-dir build -L SIMULATION
+
+# Run only FEA tests
+ctest --test-dir build -L SIMULATION_FEA
+
+# Run only unit tests
+ctest --test-dir build -L UNIT
+
+# Run only integration tests
+ctest --test-dir build -L INTEGRATION
+```
+
+### AI-Assisted Development Workflow
+
+RebelCAD includes scripts to streamline the AI-assisted development workflow:
+
+```powershell
+# Windows
+.\ai_debug.bat -module simulation -submodule fea -clean
+
+# Linux/macOS
+./ai_debug.sh --module simulation --submodule fea --clean
+```
+
+This workflow allows AI to:
+1. Build only the specific component being worked on
+2. Run tests only for that component
+3. Make changes and quickly verify them
+4. Run integration tests to ensure compatibility
+
+For more details, see the [AI-Assisted Development](docs/AI_Assisted_Development.md) guide and [CMake Strategy](docs/CMake_Strategy.md) document.
+
+## 8. Automation for Testing
 - Run All Tests Automatically:
 ```powershell
 .\build\bin\run_tests.exe

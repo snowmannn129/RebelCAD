@@ -1,0 +1,10 @@
+^C:\USERS\SNOWM\DESKTOP\VSCODE\REBELSUITE\REBELCAD\BUILD_SIMULATION\CMAKEFILES\E97BB5C7978529A61CFCF60F1DA9161C\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/snowm/Desktop/VSCode/RebelSUITE/RebelCAD -BC:/Users/snowm/Desktop/VSCode/RebelSUITE/RebelCAD/build_simulation --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/snowm/Desktop/VSCode/RebelSUITE/RebelCAD/build_simulation/RebelCAD.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

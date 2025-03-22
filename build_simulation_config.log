@@ -1,0 +1,53 @@
+-- Selecting Windows SDK version 10.0.22621.0 to target Windows 10.0.26100.
+CMake Deprecation Warning at build_simulation/_deps/googletest-src/CMakeLists.txt:4 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+
+
+CMake Deprecation Warning at build_simulation/_deps/googletest-src/googlemock/CMakeLists.txt:45 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+
+
+CMake Deprecation Warning at build_simulation/_deps/googletest-src/googletest/CMakeLists.txt:56 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+
+
+-- nlohmann_json package not found, assuming it's included in the main project
+-- 
+-- RebelCAD Configuration Summary
+-- ------------------------------
+-- Version:        0.1.0
+-- Build type:     Debug -DREBELCAD_LOG_LEVEL=INFO -DBUILD_SIMULATION=OFF -DBUILD_MODELING=OFF -DBUILD_UI=OFF -DBUILD_SKETCHING=OFF -DBUILD_ASSEMBLY=OFF -DBUILD_CONSTRAINTS=OFF -DBUILD_GRAPHICS=OFF -DBUILD_SIMULATION=ON
+-- C++ Compiler:   MSVC 19.43.34808.0
+-- C++ Standard:   17
+-- Install prefix: C:/Program Files (x86)/RebelCAD
+-- Log level:      INFO
+-- 
+-- Components:
+--   Core:         ON (required)
+--   Simulation:   ON
+--   Modeling:     ON
+--   UI:           ON
+--   Sketching:    ON
+--   Assembly:     ON
+--   Constraints:  ON
+--   Graphics:     ON
+--   Tests:        ON
+-- 
+-- Configuring done (1.2s)
+-- Generating done (0.1s)
+-- Build files have been written to: C:/Users/snowm/Desktop/VSCode/RebelSUITE/RebelCAD/build_simulation

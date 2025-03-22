@@ -176,9 +176,26 @@
   - [x] Offset Surface Tool
 
 ### 3.3 **Parametric Design**
-- [ ] **Feature-Based Modeling**
-- [ ] **History-Based Parametric Tree**
+- [x] **Feature-Based Modeling**
+  - [x] Base parametric feature class
+  - [x] Concrete feature implementations (e.g., extrusion)
+  - [x] Feature parameters and properties
+  - [x] Feature serialization and deserialization
+- [x] **History-Based Parametric Tree**
+  - [x] Dependency graph for feature relationships
+  - [x] Update propagation through dependent features
+  - [x] Feature history tracking
+  - [x] Undo/redo functionality
 - [ ] **Design Table & Configurations**
+- [x] **Parameter Management**
+  - [x] Parameter types (length, angle, boolean, etc.)
+  - [x] Parameter constraints and validation
+  - [x] Expression-based parameters
+  - [x] Parameter change callbacks
+- [x] **UI for Parameter Editing**
+  - [x] Parameter editor panel
+  - [x] Type-specific parameter editors
+  - [x] Parameter change history
 
 ---
 

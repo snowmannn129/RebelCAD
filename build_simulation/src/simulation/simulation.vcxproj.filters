@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\src\simulation\FEASystem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\src\simulation\Material.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\src\simulation\Mesh.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\src\simulation\BoundaryCondition.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\src\simulation\Load.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\src\simulation\FEAResultStructures.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\src\simulation\FEAResultCore.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\src\simulation\FEAResultAccessors.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\src\simulation\FEAResultStatistics.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\src\simulation\FEAResultIO.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\src\simulation\FEAResultModifiers.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\src\simulation\FEAResultComputation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\src\simulation\LinearStaticSolver.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\src\simulation\NonLinearSolver.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\src\simulation\DynamicSolver.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\src\simulation\ThermalBoundaryConditions.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\src\simulation\ThermalLoads.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\include\simulation\FEASystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\include\simulation\Material.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\include\simulation\Mesh.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\include\simulation\BoundaryCondition.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\include\simulation\Load.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\include\simulation\FEAResult.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\include\simulation\LinearStaticSolver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\include\simulation\NonLinearSolver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\include\simulation\DynamicSolver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\include\simulation\ThermalSolver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\include\simulation\ThermalBoundaryConditions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\include\simulation\ThermalLoads.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\snowm\Desktop\VSCode\RebelSUITE\RebelCAD\src\simulation\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{C7DA3B12-B1A8-37DF-B291-1441E7B282AE}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{30504B1D-AD33-3A3F-9CED-D2FE6FA28381}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

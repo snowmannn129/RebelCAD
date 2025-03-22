@@ -1,241 +1,164 @@
-cmake_minimum_required(VERSION 3.20)
+cmake_minimum_required(VERSION 3.15)
 project(RebelCAD VERSION 0.1.0 LANGUAGES CXX)
 
+# Log level options
+set(REBELCAD_LOG_LEVEL "INFO" CACHE STRING "Log level (ERROR, WARNING, INFO, DEBUG, VERBOSE)")
+set_property(CACHE REBELCAD_LOG_LEVEL PROPERTY STRINGS ERROR WARNING INFO DEBUG VERBOSE)
+
+# Component-specific build options
+option(BUILD_SIMULATION "Build simulation module" ON)
+option(BUILD_MODELING "Build modeling module" ON)
+option(BUILD_UI "Build UI module" ON)
+option(BUILD_SKETCHING "Build sketching module" ON)
+option(BUILD_ASSEMBLY "Build assembly module" ON)
+option(BUILD_CONSTRAINTS "Build constraints module" ON)
+option(BUILD_GRAPHICS "Build graphics module" ON)
+option(BUILD_TESTS "Build tests" ON)
+
+# Submodule-specific build options (only active if parent module is enabled)
+# Simulation submodules
+option(BUILD_SIMULATION_FEA "Build FEA submodule" ON)
+option(BUILD_SIMULATION_THERMAL "Build thermal analysis submodule" ON)
+option(BUILD_SIMULATION_DYNAMIC "Build dynamic analysis submodule" ON)
+option(BUILD_SIMULATION_NONLINEAR "Build non-linear analysis submodule" ON)
+
+# Modeling submodules
+option(BUILD_MODELING_GEOMETRY "Build geometry submodule" ON)
+option(BUILD_MODELING_TOPOLOGY "Build topology submodule" ON)
+option(BUILD_MODELING_OPERATIONS "Build modeling operations submodule" ON)
+
+# UI submodules
+option(BUILD_UI_WIDGETS "Build UI widgets submodule" ON)
+option(BUILD_UI_DIALOGS "Build UI dialogs submodule" ON)
+option(BUILD_UI_VIEWPORT "Build UI viewport submodule" ON)
+
+# Test categories
+option(BUILD_UNIT_TESTS "Build unit tests" ON)
+option(BUILD_INTEGRATION_TESTS "Build integration tests" ON)
+option(BUILD_BENCHMARK_TESTS "Build benchmark tests" ON)
+
 # Set C++ standard
-set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
 
-# Dependencies
-include(FetchContent)
-
-# Find optional packages
-find_package(OpenSSL)
-find_package(ZLIB)
-find_package(Vulkan)
-
-if(NOT Vulkan_FOUND)
-    message(WARNING "Vulkan not found - some features will be disabled")
+# Set build type if not specified
+if(NOT CMAKE_BUILD_TYPE)
+    set(CMAKE_BUILD_TYPE "Release" CACHE STRING "Build type" FORCE)
 endif()
 
-if(NOT OPENSSL_FOUND)
-    message(WARNING "OpenSSL not found - some features will be disabled")
-endif()
+# Output directories
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
-if(NOT ZLIB_FOUND)
-    message(WARNING "ZLIB not found - some features will be disabled")
-endif()
-
-# zstd
-FetchContent_Declare(
-    zstd
-    GIT_REPOSITORY https://github.com/facebook/zstd.git
-    GIT_TAG v1.5.5
-    CONFIGURE_COMMAND ""
-    BUILD_COMMAND ""
-)
-FetchContent_GetProperties(zstd)
-if(NOT zstd_POPULATED)
-    FetchContent_Populate(zstd)
-    add_subdirectory(${zstd_SOURCE_DIR}/build/cmake ${zstd_BINARY_DIR})
-endif()
-
-# GLFW
-FetchContent_Declare(
-    glfw
-    GIT_REPOSITORY https://github.com/glfw/glfw.git
-    GIT_TAG 3.3.8
-)
-FetchContent_MakeAvailable(glfw)
-
-# GLM
-FetchContent_Declare(
-    glm
-    GIT_REPOSITORY https://github.com/g-truc/glm.git
-    GIT_TAG 0.9.9.8
-)
-FetchContent_MakeAvailable(glm)
-
-# JSON
-FetchContent_Declare(
-    json
-    GIT_REPOSITORY https://github.com/nlohmann/json.git
-    GIT_TAG v3.11.2
-)
-FetchContent_MakeAvailable(json)
-
-# spdlog
-FetchContent_Declare(
-    spdlog
-    GIT_REPOSITORY https://github.com/gabime/spdlog.git
-    GIT_TAG v1.12.0
-)
-FetchContent_MakeAvailable(spdlog)
-
-# Google Test
-FetchContent_Declare(
-    googletest
-    GIT_REPOSITORY https://github.com/google/googletest.git
-    GIT_TAG v1.14.0
-)
-set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
-FetchContent_MakeAvailable(googletest)
-
-# Google Benchmark
-FetchContent_Declare(
-    benchmark
-    GIT_REPOSITORY https://github.com/google/benchmark.git
-    GIT_TAG v1.8.3
-)
-set(BENCHMARK_ENABLE_TESTING OFF)
-FetchContent_MakeAvailable(benchmark)
-
-# GLAD
-add_library(glad STATIC
-    external/glad/src/glad.c
-)
-target_include_directories(glad PUBLIC
-    external/glad/include
-)
-
-# ImGui
-add_library(imgui STATIC
-    external/imgui/imgui.cpp
-    external/imgui/imgui_demo.cpp
-    external/imgui/imgui_draw.cpp
-    external/imgui/imgui_tables.cpp
-    external/imgui/imgui_widgets.cpp
-    external/imgui/backends/imgui_impl_glfw.cpp
-    external/imgui/backends/imgui_impl_opengl3.cpp
-)
-target_include_directories(imgui PUBLIC
-    ${CMAKE_CURRENT_SOURCE_DIR}/external/imgui
-    ${CMAKE_CURRENT_SOURCE_DIR}/external/imgui/backends
-)
-
-if(Vulkan_FOUND)
-    target_include_directories(imgui PUBLIC ${Vulkan_INCLUDE_DIRS})
-endif()
-target_link_libraries(imgui PUBLIC
-    glfw
-    glad
-)
-
-# Compiler options
+# Add compiler flags
 if(MSVC)
-    add_compile_options(/W4 /WX)
-    add_definitions(
-        -D_USE_MATH_DEFINES
-        -DGLAD_GLAPI_EXPORT
-        -DGLAD_GLAPI_EXPORT_BUILD
-    )
+    # MSVC flags
+    add_compile_options(/W4 /MP)
 else()
-    add_compile_options(-Wall -Wextra -Werror)
+    # GCC/Clang flags
+    add_compile_options(-Wall -Wextra -Wpedantic)
 endif()
 
-# RebelCAD Core Library
-add_library(RebelCADCore STATIC
-    src/core/BlockAllocator.cpp
-    src/core/EventSystem.cpp
-    src/core/FileIO.cpp
-    src/core/Log.cpp
-    src/graphics/CameraController.cpp
-    src/graphics/Color.cpp
-    src/graphics/Frustum.cpp
-    src/graphics/GraphicsSystem.cpp
-    src/graphics/ObjectPicker.cpp
-    src/graphics/OpenGLShader.cpp
-    src/graphics/PreviewRenderer.cpp
-    src/graphics/RayCasting.cpp
-    src/graphics/SceneGraph.cpp
-    src/graphics/SceneNode.cpp
-    src/graphics/SelectionManager.cpp
-    src/graphics/Shader.cpp
-    src/graphics/SpatialPartitioning.cpp
-    src/graphics/Viewport.cpp
-    src/graphics/ViewportLayout.cpp
-    src/graphics/ViewSyncManager.cpp
-    src/graphics/VulkanShader.cpp
-    src/ui/PatternToolDialog.cpp
-    src/ui/DockingManager.cpp
-    src/ui/InputManager.cpp
-    src/ui/StyleManager.cpp
-    src/ui/widgets/Button.cpp
-    src/ui/widgets/TextInput.cpp
-    src/ui/widgets/Checkbox.cpp
-    src/ui/widgets/RadioButton.cpp
-    src/ui/widgets/Dropdown.cpp
-    src/ui/layouts/GridLayout.cpp
-    src/ui/layouts/FlowLayout.cpp
-    src/ui/layouts/StackLayout.cpp
-    src/ui/layouts/DockLayout.cpp
-    src/ui/layouts/FlexLayout.cpp
-    src/modeling/HalfEdge.cpp
-    src/modeling/PatternTool.cpp
-    src/modeling/patterns/PatternSpacing.cpp
+# Include directories
+include_directories(
+    ${CMAKE_SOURCE_DIR}/include
+    ${CMAKE_SOURCE_DIR}/external/eigen
 )
 
-# Enable debug symbols
-set_target_properties(RebelCADCore PROPERTIES
-    DEBUG_POSTFIX "d"
-    COMPILE_PDB_NAME "RebelCADCore"
-    COMPILE_PDB_NAME_DEBUG "RebelCADCored"
-)
-target_include_directories(RebelCADCore PUBLIC
-    ${CMAKE_CURRENT_SOURCE_DIR}/include
-    ${CMAKE_CURRENT_SOURCE_DIR}/external/imgui
-    ${CMAKE_CURRENT_SOURCE_DIR}/external/imgui/backends
-    ${json_SOURCE_DIR}/include
-    ${zstd_SOURCE_DIR}/lib
-    ${zstd_SOURCE_DIR}/lib/zstd
-)
+# Add subdirectories
+add_subdirectory(src/core)
 
-# Enable memory tracking in debug builds
-target_compile_definitions(RebelCADCore PUBLIC
-    $<$<CONFIG:Debug>:REBEL_MEMORY_TRACKING_ENABLED>
-    $<$<CONFIG:Debug>:REBEL_DEBUG>
-)
-
-if(Vulkan_FOUND)
-    target_include_directories(RebelCADCore PUBLIC ${Vulkan_INCLUDE_DIRS})
+if(BUILD_SIMULATION)
+    add_subdirectory(src/simulation)
 endif()
 
-if(OPENSSL_FOUND)
-    target_include_directories(RebelCADCore PUBLIC ${OPENSSL_INCLUDE_DIR})
-    target_link_libraries(RebelCADCore PUBLIC OpenSSL::SSL OpenSSL::Crypto)
-    target_compile_definitions(RebelCADCore PUBLIC HAVE_OPENSSL)
+if(BUILD_MODELING)
+    if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/src/modeling/CMakeLists.txt")
+        add_subdirectory(src/modeling)
+    endif()
 endif()
 
-target_link_libraries(RebelCADCore PUBLIC
-    glm::glm
-    nlohmann_json::nlohmann_json
-    libzstd_static
-    glad
-    glfw
-    spdlog::spdlog
-)
-
-if(ZLIB_FOUND)
-    target_link_libraries(RebelCADCore PUBLIC ZLIB::ZLIB)
-    target_compile_definitions(RebelCADCore PUBLIC HAVE_ZLIB)
+if(BUILD_UI)
+    if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/src/ui/CMakeLists.txt")
+        add_subdirectory(src/ui)
+    endif()
 endif()
 
-# Enable GLM experimental features
-target_compile_definitions(RebelCADCore PUBLIC GLM_ENABLE_EXPERIMENTAL)
+if(BUILD_SKETCHING)
+    if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/src/sketching/CMakeLists.txt")
+        add_subdirectory(src/sketching)
+    endif()
+endif()
 
-# Main Application
-add_executable(RebelCAD
-    src/main.cpp
-)
-target_link_libraries(RebelCAD PRIVATE
-    RebelCADCore
-    imgui
-)
+if(BUILD_ASSEMBLY)
+    if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/src/assembly/CMakeLists.txt")
+        add_subdirectory(src/assembly)
+    endif()
+endif()
 
-# Tests
-enable_testing()
-add_subdirectory(tests)
+if(BUILD_CONSTRAINTS)
+    if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/src/constraints/CMakeLists.txt")
+        add_subdirectory(src/constraints)
+    endif()
+endif()
 
-# Install rules
-install(TARGETS RebelCAD
-    RUNTIME DESTINATION bin
-)
+if(BUILD_GRAPHICS)
+    if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/src/graphics/CMakeLists.txt")
+        add_subdirectory(src/graphics)
+    endif()
+endif()
+
+if(BUILD_TESTS)
+    add_subdirectory(tests)
+endif()
+
+add_subdirectory(examples)
+
+# Define log level as a preprocessor macro
+add_definitions(-DREBELCAD_LOG_LEVEL_${REBELCAD_LOG_LEVEL})
+
+# Print configuration summary
+message(STATUS "")
+message(STATUS "RebelCAD Configuration Summary")
+message(STATUS "------------------------------")
+message(STATUS "Version:        ${PROJECT_VERSION}")
+message(STATUS "Build type:     ${CMAKE_BUILD_TYPE}")
+message(STATUS "C++ Compiler:   ${CMAKE_CXX_COMPILER_ID} ${CMAKE_CXX_COMPILER_VERSION}")
+message(STATUS "C++ Standard:   ${CMAKE_CXX_STANDARD}")
+message(STATUS "Install prefix: ${CMAKE_INSTALL_PREFIX}")
+message(STATUS "Log level:      ${REBELCAD_LOG_LEVEL}")
+message(STATUS "")
+message(STATUS "Components:")
+message(STATUS "  Core:         ON (required)")
+message(STATUS "  Simulation:   ${BUILD_SIMULATION}")
+if(BUILD_SIMULATION)
+  message(STATUS "    FEA:        ${BUILD_SIMULATION_FEA}")
+  message(STATUS "    Thermal:    ${BUILD_SIMULATION_THERMAL}")
+  message(STATUS "    Dynamic:    ${BUILD_SIMULATION_DYNAMIC}")
+  message(STATUS "    NonLinear:  ${BUILD_SIMULATION_NONLINEAR}")
+endif()
+message(STATUS "  Modeling:     ${BUILD_MODELING}")
+if(BUILD_MODELING)
+  message(STATUS "    Geometry:   ${BUILD_MODELING_GEOMETRY}")
+  message(STATUS "    Topology:   ${BUILD_MODELING_TOPOLOGY}")
+  message(STATUS "    Operations: ${BUILD_MODELING_OPERATIONS}")
+endif()
+message(STATUS "  UI:           ${BUILD_UI}")
+if(BUILD_UI)
+  message(STATUS "    Widgets:    ${BUILD_UI_WIDGETS}")
+  message(STATUS "    Dialogs:    ${BUILD_UI_DIALOGS}")
+  message(STATUS "    Viewport:   ${BUILD_UI_VIEWPORT}")
+endif()
+message(STATUS "  Sketching:    ${BUILD_SKETCHING}")
+message(STATUS "  Assembly:     ${BUILD_ASSEMBLY}")
+message(STATUS "  Constraints:  ${BUILD_CONSTRAINTS}")
+message(STATUS "  Graphics:     ${BUILD_GRAPHICS}")
+message(STATUS "  Tests:        ${BUILD_TESTS}")
+if(BUILD_TESTS)
+  message(STATUS "    Unit:       ${BUILD_UNIT_TESTS}")
+  message(STATUS "    Integration:${BUILD_INTEGRATION_TESTS}")
+  message(STATUS "    Benchmark:  ${BUILD_BENCHMARK_TESTS}")
+endif()
+message(STATUS "")
